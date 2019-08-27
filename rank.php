@@ -34,6 +34,9 @@ function GetPlayerRankById($playerId) {
     $playerRankNumber = $result['p_EU_rank'];
     $playerMMR = $result['p_EU_currentmmr'];
     $playerDataLastUpdated = $result['updatedon'];
+
+    $playerDataLastUpdated = str_replace('<u>', '', $playerDataLastUpdated);
+    $playerDataLastUpdated = str_replace('</u>', '', $playerDataLastUpdated);
     
     $playerRankName = $ranksNames[$playerRankNumber];
     
