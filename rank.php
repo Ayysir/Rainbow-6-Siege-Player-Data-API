@@ -30,6 +30,8 @@ function GetPlayerRankById($playerId) {
     if ($result['playerfound'] == false) {
         die('No player found');
     }
+
+    $playerUrl = 'https://r6tab.com/'.$playerId;
     
     $playerRankNumber = $result['p_EU_rank'];
     $playerMMR = $result['p_EU_currentmmr'];
@@ -40,7 +42,7 @@ function GetPlayerRankById($playerId) {
     
     $playerRankName = $ranksNames[$playerRankNumber];
     
-    $response = $playerRankName.' | '.'MMR: '.$playerMMR.' | '.$playerDataLastUpdated;
+    $response = $playerRankName.' | '.'MMR: '.$playerMMR.' | '.$playerDataLastUpdated.', more info in '.$playerUrl;
 
     return $response;
 }
