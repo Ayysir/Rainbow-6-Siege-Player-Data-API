@@ -1,9 +1,9 @@
 <?php
 
 function GetPlayerRankByName($playerName) {    
-    $playerdatarequest = file_get_contents("https://r6tab.com/api/search.php?platform=uplay&search=".$playerName);
+    $playerDataRequest = file_get_contents("https://r6tab.com/api/search.php?platform=uplay&search=".$playerName);
     
-    $result = json_decode($playerdatarequest, true);
+    $result = json_decode($playerDataRequest, true);
 
     if ($result['totalresults'] == 0) {
         die('No player found');
@@ -23,9 +23,9 @@ function GetPlayerRankById($playerId) {
     $json = file_get_contents('r6ranks.json');
     $ranksNames = json_decode($json, true);
     
-    $playerdatarequest = file_get_contents("https://r6tab.com/api/player.php?p_id=".$playerId);
+    $playerDataRequest = file_get_contents("https://r6tab.com/api/player.php?p_id=".$playerId);
     
-    $result = json_decode($playerdatarequest, true);
+    $result = json_decode($playerDataRequest, true);
 
     if ($result['playerfound'] == false) {
         die('No player found');
