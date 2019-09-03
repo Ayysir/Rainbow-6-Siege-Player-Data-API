@@ -1,6 +1,8 @@
 <?php
 
-function GetPlayerStatsByName($playerName, $platform, $region) {
+require 'utils.php';
+
+function GetPlayerTimePlayedByName($playerName, $platform, $region) {
     $playerDataRequest = file_get_contents("https://r6tab.com/api/search.php?platform=uplay&search=".$playerName);
     
     $result = json_decode($playerDataRequest, true);
@@ -13,12 +15,12 @@ function GetPlayerStatsByName($playerName, $platform, $region) {
 
     $playerId = $result['results'][0]['p_id'];
     
-    $response = GetPlayerStatsById($playerId, $platform, $region);
+    $response = GetPlayerTimePlayedById($playerId, $platform, $region);
 
     return $response;
 }
 
-function GetPlayerStatsById($playerId, $platform, $region) {    
+function GetPlayerTimePlayedById($playerId, $platform, $region) {    
     $playerDataRequest = file_get_contents("https://r6tab.com/api/player.php?p_id=".$playerId);
     
     $result = json_decode($playerDataRequest, true);
@@ -27,24 +29,18 @@ function GetPlayerStatsById($playerId, $platform, $region) {
         die('No player found');
     }
 
-    $playerLevel = $result['p_level'];
-    $playerKD = $result['kd'] / 100;
-
     $playerData = $result['p_data'];
     $playerData = str_replace('[', '', $playerData);
     $playerData = str_replace(']', '', $playerData);
     $playerData = explode(',', $playerData);
 
-    $playerRankedWins = $playerData[3];
-    $playerRankedLosses = $playerData[4];
+    $playerRankedTime = $playerData[0];
+    $playerCasualTime = $playerData[5];
 
-    $playerTotalRankedPlayed = $playerRankedWins + $playerRankedLosses;
-
-    $playerRankedWinRate = $playerRankedWins / $playerTotalRankedPlayed * 100;
-
-    $playerRankedWinRate = round($playerRankedWinRate, 2);
+    $totalTimeInSeconds = $playerCasualTime + $playerRankedTime;
     
-    $response = 'Lv. '.$playerLevel.' | '.$playerRankedWinRate.'% Win Rate'.' | '.$playerKD.' K/D';
+    $totalTime = secToHR($totalTimeInSeconds);
+    $response = $totalTime;
 
     return $response;
 }
