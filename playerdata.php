@@ -45,15 +45,17 @@ if (isset($_GET['p_name'])) {
         $region = $_GET['region'];
     }
 
-    if (isset($_GET['command']) && $_GET['commands'] == 'stats') {
-        $response = GetPlayerStatsById($playerId, $platform, $region);
-    } elseif (isset($_GET['command']) && $_GET['commands'] == 'time') {
-        $response = GetPlayerTimePlayedById($playerId, $platform, $region);
-    } elseif (!isset($_GET['command']) || $_GET['command'] == 'rank') {
-        $response = GetPlayerRankById($playerId, $platform, $region);
+    if (isset($_GET['command'])) {
+        if ($_GET['command'] == 'stats') {
+            $response = GetPlayerStatsById($playerId, $platform, $region);
+        } elseif (!isset($_GET['command']) || $_GET['command'] == 'time') {
+            $response = GetPlayerTimePlayedById($playerId, $platform, $region);
+        } elseif (!isset($_GET['command']) || $_GET['command'] == 'rank') {
+            $response = GetPlayerRankById($playerId, $platform, $region);
     }
 
     echo $response;
 } else {
     echo 'No data sent...';
+    }
 }
