@@ -45,8 +45,6 @@ if (isset($_GET['p_name'])) {
         $region = $_GET['region'];
     }
 
-    $response = GetPlayerRankById($playerId, $platform, $region);
-
     if (isset($_GET['command']) && $_GET['commands'] == 'stats') {
         $response = GetPlayerStatsById($playerId, $platform, $region);
     } elseif (isset($_GET['command']) && $_GET['commands'] == 'time') {
