@@ -26,8 +26,10 @@ if (isset($_GET['p_name'])) {
             $response = GetPlayerTimePlayedByName($playerName, $platform, $region);
         } elseif (!isset($_GET['command']) || $_GET['command'] == 'rank') {
             $response = GetPlayerRankByName($playerName, $platform, $region);
+        }
+    } else {
+        $response = GetPlayerRankByName($playerName, $platform, $region);
     }
-}
    echo $response;
 
 } elseif (isset($_GET['p_id'])) {
@@ -52,6 +54,8 @@ if (isset($_GET['p_name'])) {
             $response = GetPlayerTimePlayedById($playerId, $platform, $region);
         } elseif (!isset($_GET['command']) || $_GET['command'] == 'rank') {
             $response = GetPlayerRankById($playerId, $platform, $region);
+    } else {
+        $response = GetPlayerRankById($playerId, $platform, $region);
     }
 
     echo $response;
