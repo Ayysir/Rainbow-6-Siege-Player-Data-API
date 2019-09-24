@@ -1,5 +1,7 @@
 <?php
 
+include('mmr_to_rank.php');
+
 function GetPlayerRankByName($playerName, $platform, $region) {
     $playerDataRequest = file_get_contents("https://r6tab.com/api/search.php?platform=uplay&search=".$playerName);
     
@@ -20,8 +22,8 @@ function GetPlayerRankByName($playerName, $platform, $region) {
 
 function GetPlayerRankById($playerId, $platform, $region) {
 
-    $json = file_get_contents('r6ranks.json');
-    $ranksNames = json_decode($json, true);
+    //$json = file_get_contents('r6ranks.json');
+    //$ranksNames = json_decode($json, true);
     
     $playerDataRequest = file_get_contents("https://r6tab.com/api/player.php?p_id=".$playerId);
     
@@ -36,14 +38,14 @@ function GetPlayerRankById($playerId, $platform, $region) {
     $region = strtoupper($region);
     $platform = strtolower($platform);
     
-    $playerRankNumber = $result['p_'.$region.'_rank'];
+    //$playerRankNumber = $result['p_'.$region.'_rank'];
     $playerMMR = $result['p_'.$region.'_currentmmr'];
     $playerDataLastUpdated = $result['updatedon'];
 
     $playerDataLastUpdated = str_replace('<u>', '', $playerDataLastUpdated);
     $playerDataLastUpdated = str_replace('</u>', '', $playerDataLastUpdated);
     
-    $playerRankName = $ranksNames[$playerRankNumber];
+    $playerRankName = mmrToRank($playerMMR);
     
     $response = 'Region: '.$region.' | '.'Rank: '.$playerRankName.' | '.'MMR: '.$playerMMR.' | '.'Platform: '.strtoupper($platform).', '.$playerDataLastUpdated.', more info in '.$playerUrl;
 
