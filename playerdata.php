@@ -75,7 +75,7 @@ if (isset($_GET['p_name'])) {
         }
     } else {
         //Send the required data to the controller
-        $response = GetPlayerRankByName($playerName, $platform, $region);
+        $response = GetPlayerRankById($playerId, $platform, $region);
     }
 
     //Output the results
