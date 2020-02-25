@@ -3,7 +3,7 @@
 include('mmr_to_rank.php');
 
 function GetPlayerRankByName($playerName, $platform, $region) {
-    $playerDataRequest = file_get_contents("https://r6tab.com/api/search.php?platform=uplay&search=".$playerName);
+    $playerDataRequest = file_get_contents("https://r6tab.com/api/search.php?platform=$platform&search=".$playerName);
     
     $result = json_decode($playerDataRequest, true);
 
