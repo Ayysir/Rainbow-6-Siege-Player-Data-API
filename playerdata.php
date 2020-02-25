@@ -46,11 +46,11 @@ if (isset($_GET['p_name'])) {
     $playerId = $_GET['p_id'];
 
     //Check if a platform was inputed by the user
-    if (!isset($_GET['platform']) || empty($_GET['platform'])) {
+    /* if (!isset($_GET['platform']) || empty($_GET['platform'])) {
         die('Missing platform');
     } else {
         $platform = $_GET['platform'];
-    }
+    } */
 
     //Check if a region was inputed by the user
     if (!isset($_GET['region']) || empty($_GET['region'])) {
