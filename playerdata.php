@@ -26,6 +26,8 @@ if (isset($_GET['p_name'])) {
             $response = GetPlayerTimePlayedByName($playerName, $platform, $region);
         } elseif ($_GET['command'] == 'rank') {
             $response = GetPlayerRankByName($playerName, $platform, $region);
+        } else {
+            $response = "No command specified or that command does not exist";
         }
     } else {
         $response = GetPlayerRankByName($playerName, $platform, $region);
