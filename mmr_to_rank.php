@@ -1,7 +1,7 @@
 <?php
 
 function mmrToRank($mmr) {
-    $rank;
+    $rank = 'Unranked';
     
     if ($mmr == 0) {
         $rank = 'Unranked';
